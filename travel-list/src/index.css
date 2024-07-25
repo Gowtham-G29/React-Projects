@@ -29,7 +29,7 @@ body {
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto auto auto;
 }
 
 h1 {
@@ -80,7 +80,7 @@ input {
 .list {
   background-color: #5a3e2b;
   color: #ffebb3;
-  padding: 4rem 0;
+  padding: 180px 0;
   
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,7 @@ input {
 .list li {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 20px;
 }
 
 input[type="checkbox"] {
