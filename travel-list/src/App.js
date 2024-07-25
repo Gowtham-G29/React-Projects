@@ -3,12 +3,14 @@ import { useState } from "react";
 const initialItems = [
     { id: 1, description: "Passports", quantity: 2, packed: false },
     { id: 2, description: "Socks", quantity: 12, packed: false },
-    { id: 3, description: "Books", quantity: 8, packed: true },
+    { id: 3, description: "Books", quantity: 8, packed: false },
     { id: 4, description: "Dress", quantity: 10, packed: false },
 ];
 
 export default function App() {
     const [items, setItems] = useState(initialItems);
+
+    //Derived States
 
     function handleAddItems(item) {
         //update the item
@@ -33,8 +35,8 @@ export default function App() {
 
             <Logo />
             <Form onAddItems={handleAddItems} />
-            <PackingList items={items} onDeletingItem={handleDeleteItem} onToggleCheckbox={handleToggleItem}/>
-            <Stats />
+            <PackingList items={items} onDeletingItem={handleDeleteItem} onToggleCheckbox={handleToggleItem} />
+            <Stats items={items} />
 
         </div>
 
@@ -89,7 +91,7 @@ function Form({ onAddItems }) {
     )
 }
 
-function PackingList({ items, onDeletingItem ,onToggleCheckbox}) {
+function PackingList({ items, onDeletingItem, onToggleCheckbox }) {
     return (
         <div className="list">
             <ul>
@@ -102,11 +104,11 @@ function PackingList({ items, onDeletingItem ,onToggleCheckbox}) {
 
 }
 
-function Item({ item, onDeletingItem ,onToggleCheckbox }) {
+function Item({ item, onDeletingItem, onToggleCheckbox }) {
     console.log(item.id);
     return (
         <li>
-            <input type="checkbox" value={item.packed} onChange={() =>onToggleCheckbox(item.id)} />
+            <input type="checkbox" value={item.packed} onChange={() => onToggleCheckbox(item.id)} />
 
             <span style={item.packed ? { textDecoration: "line-through" } : {}}>
                 {item.quantity} {item.description}
@@ -116,10 +118,25 @@ function Item({ item, onDeletingItem ,onToggleCheckbox }) {
     )
 }
 
-function Stats() {
+
+function Stats({ items }) {
+    if (!items.length) {
+        return (
+            <p className="stats">
+                <em>Start Adding Some Items To Your Packing List 🚀</em>
+            </p>
+        )
+    }
+    //Derived State
+    const numItems = items.length;
+    const numPacked = items.filter((item) => item.packed).length;
+    const packedPercent = (numPacked / numItems) * 100;
+
     return (
         <footer className="stats">
-            <em>You have X items on your List , and you already packed X (x%)</em>
+            {packedPercent === 100 ? ' You Got Everything! Ready to go ✈️'
+                : <em>You have {`${numItems}`} items on your List , and you already packed {`${numPacked}`} ({`${packedPercent}%`})</em>}
+
         </footer>
     )
 }
