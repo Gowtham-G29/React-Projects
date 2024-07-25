@@ -1,27 +1,11 @@
-export default function App(){
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App.js";
 
-}
-
-function Logo(){
-   return(
-
-   )
-}
-
-function Form(){
-   return(
-
-   )
-}
-
-function PackingList(){
-   return(
-
-   )
-}
-
-function States(){
-    return(
-      
-    )
-}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
