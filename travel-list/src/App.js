@@ -58,7 +58,7 @@ function Form({ onAddItems }) {
 
         if (!description) return;
         //Add a new items
-        const newItem = { description, selection, packed: false, id: Date.now() };
+        const newItem = { description, selection, quantity: selection, packed: false, id: Date.now() };
         console.log(newItem);
         onAddItems(newItem);
 
@@ -107,6 +107,7 @@ function Item({ item, onDeletingItem ,onToggleCheckbox }) {
     return (
         <li>
             <input type="checkbox" value={item.packed} onChange={() =>onToggleCheckbox(item.id)} />
+
             <span style={item.packed ? { textDecoration: "line-through" } : {}}>
                 {item.quantity} {item.description}
             </span>
