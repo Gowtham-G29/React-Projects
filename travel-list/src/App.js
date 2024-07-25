@@ -130,7 +130,7 @@ function Stats({ items }) {
     //Derived State
     const numItems = items.length;
     const numPacked = items.filter((item) => item.packed).length;
-    const packedPercent = (numPacked / numItems) * 100;
+    const packedPercent = Math.round((numPacked / numItems) * 100);
 
     return (
         <footer className="stats">
