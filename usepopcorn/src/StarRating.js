@@ -10,7 +10,9 @@ const starContainerStyle = {
   display: "flex",
 };
 
-export default function StarRating({ maxRating = 5, color = "#fcc419", size = 48 }) {
+export default function StarRating({ maxRating = 5, 
+  color = "#fcc419", 
+  size = 48 }) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
