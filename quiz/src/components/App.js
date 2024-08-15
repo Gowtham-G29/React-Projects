@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen_temp";
 import Question from "./Question";
+import NextButton from "./NextButton";
 
 
 
@@ -44,6 +45,12 @@ function reducer(state, action) {
         points: action.payload === question.correctOption ? state.points + question.points : state.points,
 
       }
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answer:null,
+      };
 
     default:
       throw new Error("Action unknown")
@@ -71,8 +78,14 @@ export default function App() {
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
-        {status === 'active' && <Question question={questions[index]} answer={answer} dispatch={dispatch} />}
+        {status === 'active' && 
+        <>
+          <Question question={questions[index]} answer={answer} dispatch={dispatch} />
+          <NextButton dispatch={dispatch} answer={answer} />
 
+        </>
+      
+        }
       </Main>
 
 
